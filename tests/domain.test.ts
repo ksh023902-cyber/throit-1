@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { initialData } from '../src/lib/seed.ts';
+import { newPage, publishPage, recommendPages, searchPages, tagsFrom } from '../src/lib/domain.ts';
+test('publish creates an independent snapshot, drafts stay out of discovery',()=>{const d=initialData(),p=newPage('my-diary','me');p.title='오직 나의 초안';p.body='숨겨진 기록';d.drafts.push(p);assert.equal(searchPages(d.published,'숨겨진').length,0);const posted=publishPage(d,p);p.body='바뀐 초안';assert.equal(searchPages(posted.published,'숨겨진').length,1);assert.equal(searchPages(posted.published,'바뀐').length,0);assert.equal(posted.published.filter(x=>x.authorId==='me').length,1);assert.equal(publishPage(posted,p).published.filter(x=>x.id===p.id).length,1);});
+test('rank recommendations by shared saved tags, with saved entries last',()=>{const d=initialData();assert.equal(recommendPages(d.published,['seed-tea'])[0].id,'seed-night');assert.equal(recommendPages(d.published,['seed-tea']).at(-1)?.id,'seed-tea');});
+test('search title, tags, body and text elements; require all query terms',()=>{const d=initialData();assert.equal(searchPages(d.published,'#산책')[0].id,'seed-walk');assert.equal(searchPages(d.published,'기차표')[0].id,'seed-travel');assert.equal(searchPages(d.published,'수고했다고')[0].id,'seed-night');assert.equal(searchPages(d.published,'별일 없어서')[0].id,'seed-tea');assert.equal(searchPages(d.published,'산책 기차표').length,0);assert.deepEqual(tagsFrom('#일상, 일상 #밤'),['일상','밤']);});
