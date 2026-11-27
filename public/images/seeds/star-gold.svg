@@ -1,0 +1,2 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><defs><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="1" seed="2"/><feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 4 0 0 0 -2.2"/><feComposite in2="SourceGraphic" operator="in"/></filter></defs><path d="M30 3 L37 22 L57 23 L41 35 L47 55 L30 43 L13 55 L19 35 L3 23 L23 22z" fill="#e8b931" stroke="#1a1a1a" stroke-width="1.6" stroke-linejoin="round"/>
+<path d="M30 3 L37 22 L57 23 L41 35 L47 55 L30 43 L13 55 L19 35 L3 23 L23 22z" fill="#fff0a8" filter="url(#g)" opacity=".85"/></svg>
