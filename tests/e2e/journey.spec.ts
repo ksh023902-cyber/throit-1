@@ -235,7 +235,10 @@ test('background, photo and playable video attachments persist after refresh', a
   // 두 스티커가 일부 겹쳐 있으므로 ★에 가려지지 않는 ✿의 왼쪽 위를 누릅니다.
   await viewer.getByRole('button', { name: '스티커 열기: ✿', exact: true }).click({ position: { x: 10, y: 10 } });
   await expect(page.getByAltText('스티커에 연결된 사진')).toBeVisible();
-  await dialog(page, '스티커 속 이야기').getByRole('button', { name: '닫기' }).click();
+  // 자료만 보이고, 바깥을 누르면 닫혀요
+  await page.mouse.click(8, 8);
+  await expect(dialog(page, '스티커 속 이야기')).toHaveCount(0);
+  await expect(viewer).toBeVisible();
   await viewer.getByRole('button', { name: '스티커 열기: ★', exact: true }).click();
   await expect(page.locator('video')).toBeVisible();
   await expect.poll(() => page.locator('video').evaluate((v: HTMLVideoElement) => v.readyState)).toBeGreaterThan(0);
@@ -252,4 +255,29 @@ test('mobile and desktop layout have no horizontal overflow', async ({ page }) =
   await nav(page).getByRole('button', { name: '피드', exact: true }).click();
   await page.screenshot({ path: 'test-results/screenshots/throit-desktop.png', fullPage: true });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('viewers see only the uploaded story, centred, with no title or labels', async ({ page }) => {
+  await page.goto('/');
+  await startPage(page);
+  await addSticker(page, '♡');
+  await page.getByTestId('editor-canvas').getByRole('button', { name: '스티커 속 이야기 넣기' }).click();
+  const attach = dialog(page, '스티커에 이야기 연결');
+  await attach.getByRole('textbox', { name: '연결할 글' }).fill('오직 이 글만');
+  await attach.getByRole('button', { name: '연결하기', exact: true }).click();
+  await publish(page, '자료만보기');
+  await search(page, '자료만보기');
+  await page.getByRole('button', { name: /자료만보기/ }).click();
+  await page.getByRole('button', { name: '스티커 열기: ♡', exact: true }).click();
+  const story = dialog(page, '스티커 속 이야기');
+  await expect(story).toBeVisible();
+  // 제목·버튼 글씨 없이 넣어둔 글만, 화면 한가운데에
+  expect((await story.innerText()).trim()).toBe('오직 이 글만');
+  const box = (await story.locator('.story-text').boundingBox())!;
+  const vw = page.viewportSize()!;
+  expect(Math.abs(box.x + box.width / 2 - vw.width / 2)).toBeLessThan(3);
+  expect(Math.abs(box.y + box.height / 2 - vw.height / 2)).toBeLessThan(3);
+  await page.keyboard.press('Escape');
+  await expect(story).toHaveCount(0);
+  await expect(dialog(page, '자료만보기')).toBeVisible();
 });
