@@ -5,10 +5,10 @@ import { palette, penSizes, pens, type PenSettings } from '../lib/pens';
 const icons: Record<PenKind, typeof Pen> = { ballpoint: Pen, fountain: PenTool, brush: Brush, pencil: Pencil, highlighter: Highlighter };
 
 /** 펜을 고르면 아래 도구 막대 위에 나타나는 펜·색·굵기 선반. */
-export function PenTray({ value, onChange }: { value: PenSettings; onChange: (next: PenSettings) => void }) {
+export function PenTray({ value, onChange, inline = false }: { value: PenSettings; onChange: (next: PenSettings) => void; inline?: boolean }) {
   const set = (changes: Partial<PenSettings>) => onChange({ ...value, ...changes });
   const custom = !palette.some(p => p.color === value.color);
-  return <div className="pen-tray" role="group" aria-label="펜 설정">
+  return <div className={`pen-tray ${inline ? 'inline' : ''}`} role="group" aria-label="펜 설정">
     <div className="pen-row" role="radiogroup" aria-label="펜 종류">
       {pens.map(p => { const Icon = icons[p.kind]; return <button key={p.kind} role="radio" aria-checked={value.pen === p.kind} aria-label={p.label} title={`${p.label}: ${p.hint}`} className={value.pen === p.kind ? 'active' : ''} onClick={() => set({ pen: p.kind })}><Icon size={20} /></button>; })}
     </div>

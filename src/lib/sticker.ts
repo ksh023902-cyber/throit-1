@@ -8,7 +8,6 @@ export async function cutoutSticker(file: File, progress: (message: string) => v
  const canvas = document.createElement('canvas');
  canvas.width = Math.max(1, Math.round(bitmap.width * scale)); canvas.height = Math.max(1, Math.round(bitmap.height * scale));
  const ctx = canvas.getContext('2d')!; ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height); bitmap.close();
- const png = (c: HTMLCanvasElement) => new Promise<Blob>((resolve,reject) => c.toBlob(b => b ? resolve(b) : reject(new Error('이미지를 변환하지 못했어요.')), 'image/png'));
  const input = await png(canvas);
  const { removeBackground } = await import('@imgly/background-removal');
  progress('배경 제거 중…');
@@ -16,10 +15,18 @@ export async function cutoutSticker(file: File, progress: (message: string) => v
   progress(key.startsWith('fetch:') && current < total ? '배경 제거 모델 준비 중…' : '배경 제거 중…');
  }});
  const foreground = await createImageBitmap(result); canvas.width=foreground.width;canvas.height=foreground.height;ctx.drawImage(foreground,0,0);foreground.close();
- const {data}=ctx.getImageData(0,0,canvas.width,canvas.height);let left=canvas.width,top=canvas.height,right=-1,bottom=-1;
- for(let y=0;y<canvas.height;y++) for(let x=0;x<canvas.width;x++) if(data[(y*canvas.width+x)*4+3]>12){left=Math.min(left,x);top=Math.min(top,y);right=Math.max(right,x);bottom=Math.max(bottom,y);}
- if(right<0) throw new Error('피사체를 찾지 못했어요. 다른 이미지를 선택해주세요.');
- const cropped=document.createElement('canvas');const pad=8;cropped.width=right-left+1+pad*2;cropped.height=bottom-top+1+pad*2;
- cropped.getContext('2d')!.drawImage(canvas,left,top,right-left+1,bottom-top+1,pad,pad,right-left+1,bottom-top+1);
+ const cropped=trimTransparent(canvas,8);
+ if(!cropped) throw new Error('피사체를 찾지 못했어요. 다른 이미지를 선택해주세요.');
  return new File([await png(cropped)],'sticker.png',{type:'image/png'});
+}
+
+export const png = (c: HTMLCanvasElement) => new Promise<Blob>((resolve,reject) => c.toBlob(b => b ? resolve(b) : reject(new Error('이미지를 변환하지 못했어요.')), 'image/png'));
+/** 투명한 가장자리를 잘라내고 pad만큼 여백을 둔 새 캔버스를 돌려줘요. 그려진 게 없으면 null. */
+export function trimTransparent(canvas: HTMLCanvasElement, pad: number): HTMLCanvasElement | null {
+ const ctx=canvas.getContext('2d')!;const {data}=ctx.getImageData(0,0,canvas.width,canvas.height);let left=canvas.width,top=canvas.height,right=-1,bottom=-1;
+ for(let y=0;y<canvas.height;y++) for(let x=0;x<canvas.width;x++) if(data[(y*canvas.width+x)*4+3]>12){left=Math.min(left,x);top=Math.min(top,y);right=Math.max(right,x);bottom=Math.max(bottom,y);}
+ if(right<0) return null;
+ const cropped=document.createElement('canvas');cropped.width=right-left+1+pad*2;cropped.height=bottom-top+1+pad*2;
+ cropped.getContext('2d')!.drawImage(canvas,left,top,right-left+1,bottom-top+1,pad,pad,right-left+1,bottom-top+1);
+ return cropped;
 }

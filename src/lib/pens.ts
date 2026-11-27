@@ -73,8 +73,9 @@ export function widthFactor(kind: PenKind, speed: number, pressure: number | nul
 const RATIO = 4 / 3;
 
 /** 굵기가 변하는 선의 윤곽을 SVG path로 만들어요. */
-export function variablePath(stroke: Stroke) {
-  const pts = stroke.points.map(([x, y]) => [x, y * RATIO] as [number, number]);
+/** ratio는 그리는 곳의 세로÷가로 (종이는 4/3, 정사각형 스티커 판은 1). */
+export function variablePath(stroke: Stroke, ratio = RATIO) {
+  const pts = stroke.points.map(([x, y]) => [x, y * ratio] as [number, number]);
   const n = pts.length;
   const w = (i: number) => {
     let f = stroke.widths?.[i] ?? 1;
@@ -98,7 +99,7 @@ export function variablePath(stroke: Stroke) {
     left.push([pts[i][0] - dy * r, pts[i][1] + dx * r]);
     right.push([pts[i][0] + dy * r, pts[i][1] - dx * r]);
   }
-  const f = (p: [number, number]) => `${+p[0].toFixed(2)},${+(p[1] / RATIO).toFixed(2)}`;
+  const f = (p: [number, number]) => `${+p[0].toFixed(2)},${+(p[1] / ratio).toFixed(2)}`;
   const smooth = (line: [number, number][]) => line.slice(1).map((p, i) => {
     const prev = line[i];
     return `Q${f(prev)} ${f([(prev[0] + p[0]) / 2, (prev[1] + p[1]) / 2])}`;
