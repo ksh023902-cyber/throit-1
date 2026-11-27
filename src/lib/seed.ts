@@ -3,7 +3,7 @@ const base = { diaryId: 'community', strokes: [], createdAt: '2026-11-20T09:00:0
 export const seedPages: DiaryPage[] = [
  { ...base, id: 'seed-tea', authorId: 'slow.sunday', title: '별일 없어서 더 좋았던 하루', body: '늦은 오후, 조금 식은 차 한 잔.\n창가에 앉아 아무것도 하지 않았다.\n\n이런 날도 오래 기억하고 싶어.\n별일 없는 하루가 주는 다정함을.', tags: ['일상', '작은행복', '기록'], theme: 'cream', elements: [
  { id:'s1',kind:'text',x:8,y:8,width:81,rotation:-2,text:'별일 없어서\n더 좋았던 하루.' },
- { id:'s2',kind:'photo',x:42,y:34,width:48,rotation:6,assetId:'/images/diary-memory.png',attachment:{kind:'text',text:'말없이 건네는 따뜻한 차.\n같이 걷는 평범한 하루가 오래도록 함께하는 사랑이 되기를.'}},
+ { id:'s2',kind:'photo',x:42,y:34,width:48,rotation:6,assetId:`${import.meta.env?.BASE_URL??"/"}images/diary-memory.png`,attachment:{kind:'text',text:'말없이 건네는 따뜻한 차.\n같이 걷는 평범한 하루가 오래도록 함께하는 사랑이 되기를.'}},
  { id:'s3',kind:'text',x:8,y:39,width:32,rotation:-3,text:'따뜻한 차,\n느린 오후.\n\n오늘의 행복은\n생각보다\n가까이에 있었다.'},
  { id:'s4',kind:'sticker',x:12,y:72,width:19,rotation:-12,text:'✿',attachment:{kind:'text',text:'오늘의 작은 행복\n☑ 창문을 열고 햇빛 쐬기\n☑ 따뜻한 차 마시기\n☑ 다정한 말 한마디 건네기'}},
  { id:'s5',kind:'text',x:39,y:82,width:50,rotation:2,text:'nothing special,\nbut everything I needed.' }

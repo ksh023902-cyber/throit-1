@@ -1,7 +1,8 @@
 export type Theme = 'cream' | 'lavender' | 'mint' | 'white';
 export type Attachment = { kind: 'text' | 'photo' | 'video'; text?: string; assetId?: string };
-export type PageElement = { id: string; kind: 'text' | 'photo' | 'sticker'; x: number; y: number; width: number; rotation: number; text?: string; assetId?: string; attachment?: Attachment };
-export type Stroke = { id: string; points: [number, number][]; color: string; size: number };
+export type PageElement = { id: string; kind: 'text' | 'photo' | 'sticker'; x: number; y: number; width: number; rotation: number; scale?: number; text?: string; font?: string; assetId?: string; attachment?: Attachment };
+export type PenKind = 'ballpoint' | 'fountain' | 'brush' | 'pencil' | 'highlighter';
+export type Stroke = { id: string; points: [number, number][]; color: string; size: number; pen?: PenKind; widths?: number[] };
 export type DiaryPage = { id: string; diaryId: string; authorId: string; title: string; body: string; tags: string[]; theme: Theme; backgroundAssetId?: string; elements: PageElement[]; strokes: Stroke[]; createdAt: string; publishedAt?: string };
 export type Profile = { id: string; handle: string; photo?: string; bio: string };
 export type Diary = { id: string; title: string; cover: string };
