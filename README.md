@@ -26,6 +26,7 @@ npm run dev
 - `src/screens/Profile.tsx`: 사진·아이디·소개 편집, 내 게시/보관 목록
 - `src/components/PageCanvas.tsx`: 읽기·편집·썸네일 공통 페이지 렌더러
 - `src/components/PenTray.tsx`: 펜 종류·색상·굵기 선반
+- `src/lib/fonts.ts`: 글쓰기 글꼴 16종(손글씨·붓/마커·고딕/명조/타자기, 모두 Google Fonts 무료 한글 글꼴), 글꼴별 크기 보정, 마지막에 고른 글꼴 기억
 - `src/lib/pens.ts`: 펜 5종(볼펜·만년필·붓펜·연필·형광펜), 기본 팔레트, 속도·필압에 따른 굵기 계산
 - `src/components/PageViewer.tsx`: 공통 큰 페이지 뷰어
 - `src/components/StickerOpener.tsx`: 글·사진·영상 공통 첨부 뷰어
