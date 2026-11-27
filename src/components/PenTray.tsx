@@ -10,7 +10,7 @@ export function PenTray({ value, onChange }: { value: PenSettings; onChange: (ne
   const custom = !palette.some(p => p.color === value.color);
   return <div className="pen-tray" role="group" aria-label="펜 설정">
     <div className="pen-row" role="radiogroup" aria-label="펜 종류">
-      {pens.map(p => { const Icon = icons[p.kind]; return <button key={p.kind} role="radio" aria-checked={value.pen === p.kind} aria-label={p.label} title={p.hint} className={value.pen === p.kind ? 'active' : ''} onClick={() => set({ pen: p.kind })}><Icon size={18} /><span>{p.label}</span></button>; })}
+      {pens.map(p => { const Icon = icons[p.kind]; return <button key={p.kind} role="radio" aria-checked={value.pen === p.kind} aria-label={p.label} title={`${p.label}: ${p.hint}`} className={value.pen === p.kind ? 'active' : ''} onClick={() => set({ pen: p.kind })}><Icon size={20} /></button>; })}
     </div>
     <div className="pen-row pen-colors" role="radiogroup" aria-label="펜 색상">
       {palette.map(c => <button key={c.color} role="radio" aria-checked={value.color === c.color} aria-label={c.label} className={`pen-swatch ${value.color === c.color ? 'active' : ''}`} style={{ background: c.color }} onClick={() => set({ color: c.color })} />)}
