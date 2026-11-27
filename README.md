@@ -38,7 +38,7 @@ GitHub Actions(`.github/workflows/e2e.yml`)에서 push와 pull request마다 도
 - `src/components/PageViewer.tsx`: 공통 큰 페이지 뷰어
 - `src/components/StickerOpener.tsx`: 글·사진·영상 공통 첨부 뷰어
 - `src/lib/domain.ts`: 검색·추천·게시 스냅샷 로직
-- `src/lib/seed.ts`: 피드 예시 필렛 7개. 손으로 꾸민 다이어리처럼 손글씨, 사진 인화, 캐릭터 스티커, 라벨, 테이프를 겹쳐 페이지마다 다른 사람이 만든 듯한 개성을 냈습니다(여행 사진 스프레드, 별 테이프 하루 타임라인, 검정 펜 불렛저널, 마커 글씨 위 큰 그림, 검은 종이 영화 기록, 보라 잉크 필사, 스티커 가득한 카페). 그림과 사진은 `public/images/seeds/`에 있고, 앱을 열 때 예시만 최신 것으로 바꾸고 내 필렛과 보관은 그대로 둡니다.
+- `src/lib/seed.ts`: 피드 예시 필렛 7개. 손으로 꾸민 다이어리처럼 손글씨, 사진 인화, 손그림 스티커, 테이프를 겹치되 페이지마다 구도·소재·색을 달리했습니다(검은 종이 영화 기록, 쿠폰 카드 카페, 걱정 유리병, 포토스트립 제주 여행, 보라 잉크 필사, 레코드 플레이리스트, 24시간 원형 시간표). 그림과 사진은 `public/images/seeds/`에 있고, 앱을 열 때 예시만 최신 것으로 바꾸고 내 필렛과 보관은 그대로 둡니다.
 - `src/lib/storage.ts`: IndexedDB 상태와 미디어 Blob 저장
 - `src/lib/store.tsx`: 저장 큐, 오류 표시, 저장 재시도
 

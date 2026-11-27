@@ -1,4 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 100"><defs><filter id="w" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="5"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></defs><g filter="url(#w)" stroke="#1a1a1a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-<path d="M14 90 V40 C14 12 76 12 76 40 V90 l-10 -8 -10 8 -10 -8 -10 8 -10 -8z" fill="#cdb6ea"/>
-<path d="M32 46 q4 -4 8 0 M50 46 q4 -4 8 0" fill="none"/><path d="M40 58 q5 4 10 0" fill="none"/>
-</g><g fill="#f19bb5" opacity=".6"><ellipse cx="30" cy="54" rx="4" ry="2.2"/><ellipse cx="62" cy="54" rx="4" ry="2.2"/></g></svg>
