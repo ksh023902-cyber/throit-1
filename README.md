@@ -15,7 +15,14 @@ npm run dev
 도메인 테스트: `npm test`
 브라우저 전체 흐름: `npm run test:e2e`
 
-브라우저 테스트는 기본적으로 macOS의 Google Chrome을 사용합니다. 다른 환경에서는 `playwright.config.ts`의 `launchOptions.executablePath`를 해당 Chrome 경로로 바꾸거나, 설치된 Playwright Chromium을 사용하도록 제거하세요.
+브라우저 테스트는 Playwright가 설치한 Chromium을 사용합니다. 처음 한 번 `npx playwright install chromium`을 실행하세요. 설치된 Google Chrome을 쓰고 싶다면 `CHROME_PATH` 환경 변수에 실행 파일 경로를 지정합니다.
+
+```sh
+# macOS 예시
+CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" npm run test:e2e
+```
+
+GitHub Actions(`.github/workflows/e2e.yml`)에서 push와 pull request마다 도메인 테스트와 브라우저 테스트를 실행합니다.
 
 ## 구조
 
@@ -50,7 +57,7 @@ npm run dev
 
 ## 검증 범위
 
-`tests/e2e/journey.spec.ts`에서 작성 → 올리기 → 검색 → 보관 → 새로고침 → 프로필 다시 열기, 초안 노출 방지, 게시본 독립성, 펜·되돌리기·드래그, 글/사진/영상 첨부 복원, 프로필 사진·아이디 저장, 태그 추천, 모바일·데스크톱 가로 넘침을 확인합니다.
+`tests/e2e/journey.spec.ts`에서 작성 → 올리기 → 검색 → 보관 → 새로고침 → 프로필 다시 열기, 초안 노출 방지, 게시본 독립성, 펜·되돌리기·드래그, 배경 이미지와 스티커의 글/사진/영상 첨부 복원, 프로필 사진·아이디 저장, 태그 추천, 모바일·데스크톱 가로 넘침을 확인합니다.
 
 ## 이미지 스티커 배경 제거
 
