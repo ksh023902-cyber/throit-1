@@ -22,3 +22,12 @@ test('the size handle on the top right resizes the text box and its letters',asy
  await canvas.getByRole('button',{name:'글 선택: 크기 조절'}).click();const h2=(await handle.boundingBox())!;await page.mouse.move(h2.x+h2.width/2,h2.y+h2.height/2);await page.mouse.down();await page.mouse.move(h2.x+h2.width/2-50,h2.y+h2.height/2+20,{steps:6});await page.mouse.up();const f2=await font();expect(f2).toBeLessThan(f0);
  await page.waitForTimeout(800);await page.reload();await page.getByRole('navigation',{name:'하단 메뉴'}).getByRole('button',{name:'＋ 책장'}).click();await page.getByRole('button',{name:'내 작은 날들 열기'}).click();await page.locator('.page-tile').first().click();await expect.poll(()=>canvas.getByRole('button',{name:'글 선택: 크기 조절'}).locator('.handwritten').evaluate(e=>parseFloat(getComputedStyle(e).fontSize))).toBeCloseTo(f2,0);
  expect(errors).toEqual([]);});
+test('the angle handle on the top left rotates the text box',async({page})=>{const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));const canvas=await writeText(page,'각도 조절');
+ const piece=canvas.getByRole('button',{name:'글 선택: 각도 조절'});const rot=()=>piece.evaluate(e=>parseFloat((e as HTMLElement).style.transform.match(/rotate\((-?[\d.]+)deg\)/)![1]));
+ const handle=canvas.getByRole('button',{name:'글 각도 조절'});await expect(handle).toBeVisible();const pb=(await piece.boundingBox())!;const cx=pb.x+pb.width/2,cy=pb.y+pb.height/2;const h=(await handle.boundingBox())!;const hx=h.x+h.width/2,hy=h.y+h.height/2;expect(hx).toBeLessThan(pb.x+4);
+ // swing the handle 30° clockwise around the box centre
+ const r=Math.hypot(hx-cx,hy-cy),a0=Math.atan2(hy-cy,hx-cx);await page.mouse.move(hx,hy);await page.mouse.down();for(let k=1;k<=10;k++){const a=a0+Math.PI/6*k/10;await page.mouse.move(cx+r*Math.cos(a),cy+r*Math.sin(a));}await page.mouse.up();
+ expect(await rot()).toBeGreaterThan(24);expect(await rot()).toBeLessThan(36);await expect(page.getByRole('dialog')).toHaveCount(0);
+ await page.getByRole('button',{name:'되돌리기'}).click();await expect.poll(rot).toBe(0);
+ await piece.click();await handle.focus();await page.keyboard.press('ArrowRight');await expect.poll(rot).toBe(5);
+ expect(errors).toEqual([]);});
