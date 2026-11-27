@@ -281,3 +281,20 @@ test('viewers see only the uploaded story, centred, with no title or labels', as
   await expect(story).toHaveCount(0);
   await expect(dialog(page, '자료만보기')).toBeVisible();
 });
+
+test('the feed shows no attachment badge on stickers', async ({ page }) => {
+  await page.goto('/');
+  await startPage(page);
+  await addSticker(page, '✳');
+  await page.getByTestId('editor-canvas').getByRole('button', { name: '스티커 속 이야기 넣기' }).click();
+  const attach = dialog(page, '스티커에 이야기 연결');
+  await attach.getByRole('textbox', { name: '연결할 글' }).fill('숨은 글');
+  await attach.getByRole('button', { name: '연결하기', exact: true }).click();
+  await expect(page.getByTestId('editor-canvas').locator('.clip-badge')).toHaveCount(1);
+  await publish(page, '표시없음');
+  await search(page, '표시없음');
+  await page.getByRole('button', { name: /표시없음/ }).click();
+  const viewer = dialog(page, '표시없음');
+  await expect(viewer.getByRole('button', { name: '스티커 열기: ✳', exact: true })).toBeVisible();
+  await expect(page.locator('.clip-badge')).toHaveCount(0);
+});
