@@ -8,7 +8,7 @@ import { PageViewer } from './PageViewer';
 export function AuthorAvatar({authorId}:{authorId:string}) {
  const {data}=useStore();
  const url=useMedia(authorId===data.profile.id?data.profile.photo:undefined);
- return <img className="author-photo" src={url||'/images/avatar-flower.png'} alt="작성자 프로필 사진"/>;
+ return <img className="author-photo" src={url||`${import.meta.env.BASE_URL}images/avatar-flower.png`} alt="작성자 프로필 사진"/>;
 }
 export function AuthorProfile({authorId,onClose}:{authorId:string;onClose:()=>void}) {
  const {data}=useStore();const [page,setPage]=useState<DiaryPage|null>(null);
