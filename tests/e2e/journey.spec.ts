@@ -160,13 +160,13 @@ test('pen, undo, drag, text sticker attachment and reload', async ({ page }) => 
 test('saved tags personalize the next visit and profile edits persist', async ({ page }) => {
   await page.goto('/');
   const first = page.locator('.feed-slide').first();
-  await expect(first).toContainText('@slow.sunday');
+  await expect(first).toContainText('@midnight.reel');
   await first.getByRole('button', { name: '마음에 닿았다면, 보관' }).click();
   await expect(page.getByRole('status')).toContainText('보관');
   await page.reload();
-  // '별일 없어서 더 좋았던 하루'를 보관하면 태그가 가장 많이 겹치는 '잠들기 전, 마음 정리'(@dear.moon)가 맨 앞에 옵니다.
-  await expect(page.locator('.feed-slide').first()).toContainText('@dear.moon');
-  await expect(page.locator('.feed-slide').first()).toContainText('잘하지 못한 일보다 잘 버틴 순간을 세어본다.');
+  // 영화 리뷰 '엔딩 크레딧이 끝날 때까지'를 보관하면 태그(밤, OST)가 가장 많이 겹치는 '새벽 2시의 플레이리스트'(@side.b.tape)가 맨 앞에 옵니다.
+  await expect(page.locator('.feed-slide').first()).toContainText('@side.b.tape');
+  await expect(page.locator('.feed-slide').first()).toContainText('잠이 안 와서 만든 새벽 플레이리스트.');
 
   await nav(page).getByRole('button', { name: '프로필', exact: true }).click();
   await page.getByRole('button', { name: '프로필 편집' }).click();

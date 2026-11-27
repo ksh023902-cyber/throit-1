@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 122 142">
+<defs><mask id="m"><rect x="-6" y="-6" width="122" height="142" fill="#fff"/><g fill="#000"><circle cx="5" cy="0" r="4"/><circle cx="5" cy="130" r="4"/><circle cx="15" cy="0" r="4"/><circle cx="15" cy="130" r="4"/><circle cx="25" cy="0" r="4"/><circle cx="25" cy="130" r="4"/><circle cx="35" cy="0" r="4"/><circle cx="35" cy="130" r="4"/><circle cx="45" cy="0" r="4"/><circle cx="45" cy="130" r="4"/><circle cx="55" cy="0" r="4"/><circle cx="55" cy="130" r="4"/><circle cx="65" cy="0" r="4"/><circle cx="65" cy="130" r="4"/><circle cx="75" cy="0" r="4"/><circle cx="75" cy="130" r="4"/><circle cx="85" cy="0" r="4"/><circle cx="85" cy="130" r="4"/><circle cx="95" cy="0" r="4"/><circle cx="95" cy="130" r="4"/><circle cx="105" cy="0" r="4"/><circle cx="105" cy="130" r="4"/><circle cx="0" cy="5" r="4"/><circle cx="110" cy="5" r="4"/><circle cx="0" cy="15" r="4"/><circle cx="110" cy="15" r="4"/><circle cx="0" cy="25" r="4"/><circle cx="110" cy="25" r="4"/><circle cx="0" cy="35" r="4"/><circle cx="110" cy="35" r="4"/><circle cx="0" cy="45" r="4"/><circle cx="110" cy="45" r="4"/><circle cx="0" cy="55" r="4"/><circle cx="110" cy="55" r="4"/><circle cx="0" cy="65" r="4"/><circle cx="110" cy="65" r="4"/><circle cx="0" cy="75" r="4"/><circle cx="110" cy="75" r="4"/><circle cx="0" cy="85" r="4"/><circle cx="110" cy="85" r="4"/><circle cx="0" cy="95" r="4"/><circle cx="110" cy="95" r="4"/><circle cx="0" cy="105" r="4"/><circle cx="110" cy="105" r="4"/><circle cx="0" cy="115" r="4"/><circle cx="110" cy="115" r="4"/><circle cx="0" cy="125" r="4"/><circle cx="110" cy="125" r="4"/></g></mask>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd59e"/><stop offset="1" stop-color="#f59a7a"/></linearGradient></defs>
+<g mask="url(#m)"><rect x="-2" y="-2" width="114" height="134" fill="#fffaf0"/></g>
+<rect x="10" y="10" width="90" height="96" fill="url(#sky)"/>
+<circle cx="55" cy="66" r="18" fill="#fff3d6"/>
+<path d="M10 72h90v34H10z" fill="#3d8fb0"/>
+<path d="M10 72q11-5 22 0t23 0t22 0t23 0v8q-11-5-23 0t-22 0t-23 0t-22 0z" fill="#9fd4e0"/>
+<path d="M10 90q11-4 22 0t23 0t22 0t23 0" fill="none" stroke="#bfe5ec" stroke-width="1.5"/>
+<path d="M60 40l4-3 4 3-4-1zM72 34l3-2 3 2-3-1z" fill="#3a4a5a"/>
+<text x="55" y="121" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#c8453d" letter-spacing="1.5">JEJU · 450</text>
+</svg>

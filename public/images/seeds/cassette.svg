@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 128">
+<rect x="2" y="2" width="196" height="124" rx="10" fill="#2b2333"/>
+<rect x="14" y="12" width="172" height="74" rx="5" fill="#f6efe2"/>
+<rect x="14" y="12" width="172" height="16" rx="5" fill="#ff8fab"/>
+<rect x="14" y="24" width="172" height="5" fill="#ffd27a"/>
+<text x="24" y="24" font-family="'Courier New',monospace" font-size="10" font-weight="700" fill="#2b2333">SIDE B · 2AM MIX</text>
+<rect x="44" y="38" width="112" height="36" rx="18" fill="#3a3142"/>
+<circle cx="66" cy="56" r="12" fill="#f6efe2"/><circle cx="134" cy="56" r="12" fill="#f6efe2"/>
+<g fill="#3a3142"><circle cx="66" cy="56" r="4"/><circle cx="134" cy="56" r="4"/></g>
+<g stroke="#3a3142" stroke-width="2"><path d="M66 46v-3M66 66v3M56 56h-3M76 56h3M134 46v-3M134 66v3M124 56h-3M144 56h3"/></g>
+<rect x="84" y="48" width="32" height="16" fill="#6a4b52" opacity=".85"/>
+<path d="M44 126l10-26h92l10 26z" fill="#3a3142"/>
+<g fill="#2b2333"><circle cx="72" cy="114" r="4"/><circle cx="128" cy="114" r="4"/></g>
+<g fill="#5a4d63"><circle cx="12" cy="116" r="3"/><circle cx="188" cy="116" r="3"/><circle cx="12" cy="10" r="3"/><circle cx="188" cy="10" r="3"/></g>
+</svg>

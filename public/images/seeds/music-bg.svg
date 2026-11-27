@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 560">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d1433"/><stop offset=".5" stop-color="#4a2457"/><stop offset=".78" stop-color="#a6416e"/><stop offset="1" stop-color="#2a1530"/></linearGradient>
+<linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd27a"/><stop offset="1" stop-color="#ff6f91"/></linearGradient>
+<mask id="cut"><rect width="360" height="560" fill="#fff"/><rect x="100" y="420" width="160" height="3" fill="#000"/><rect x="100" y="432" width="160" height="4" fill="#000"/><rect x="100" y="444" width="160" height="5" fill="#000"/><rect x="100" y="454" width="160" height="6" fill="#000"/></mask>
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/></filter>
+<filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+</defs>
+<rect width="360" height="560" fill="url(#bg)"/>
+<g fill="#ffe9f6"><circle cx="40" cy="60" r="1.3" opacity="0.8"/><circle cx="110" cy="30" r="0.9" opacity="0.6"/><circle cx="300" cy="50" r="1.4" opacity="0.8"/><circle cx="250" cy="120" r="1" opacity="0.5"/><circle cx="70" cy="160" r="1" opacity="0.5"/><circle cx="330" cy="190" r="1.2" opacity="0.6"/><circle cx="180" cy="80" r="0.8" opacity="0.5"/><circle cx="20" cy="250" r="1" opacity="0.4"/><circle cx="150" cy="210" r="0.7" opacity="0.4"/></g>
+<circle cx="180" cy="430" r="78" fill="#ff7aa2" opacity=".35" filter="url(#glow)"/>
+<circle cx="180" cy="430" r="66" fill="url(#sun)" mask="url(#cut)"/>
+<rect y="462" width="360" height="98" fill="#1e1029"/>
+<g stroke="#ff7ac0" stroke-width="1.2" opacity=".6"><line x1="-60" y1="462" x2="-540" y2="560"/><line x1="-30" y1="462" x2="-450" y2="560"/><line x1="0" y1="462" x2="-360" y2="560"/><line x1="30" y1="462" x2="-270" y2="560"/><line x1="60" y1="462" x2="-180" y2="560"/><line x1="90" y1="462" x2="-90" y2="560"/><line x1="120" y1="462" x2="0" y2="560"/><line x1="150" y1="462" x2="90" y2="560"/><line x1="180" y1="462" x2="180" y2="560"/><line x1="210" y1="462" x2="270" y2="560"/><line x1="240" y1="462" x2="360" y2="560"/><line x1="270" y1="462" x2="450" y2="560"/><line x1="300" y1="462" x2="540" y2="560"/><line x1="330" y1="462" x2="630" y2="560"/><line x1="360" y1="462" x2="720" y2="560"/><line x1="390" y1="462" x2="810" y2="560"/><line x1="420" y1="462" x2="900" y2="560"/><line x1="0" y1="466" x2="360" y2="466"/><line x1="0" y1="472" x2="360" y2="472"/><line x1="0" y1="481" x2="360" y2="481"/><line x1="0" y1="494" x2="360" y2="494"/><line x1="0" y1="512" x2="360" y2="512"/><line x1="0" y1="538" x2="360" y2="538"/></g>
+<rect width="360" height="560" opacity=".08" filter="url(#n)"/>
+</svg>

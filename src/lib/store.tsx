@@ -1,13 +1,13 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import type { AppData, DiaryPage, Profile } from '../types';
 import { stickerLibrary } from './stickerLibrary';
-import { initialData } from './seed';
+import { initialData, withCurrentSeeds } from './seed';
 import { readState, writeState } from './storage';
 import { newPage, publishPage, uid } from './domain';
 type Store = { data:AppData; ready:boolean; saving:boolean; error:string; notice:string; notify:(s:string)=>void; retry:()=>void; saveDraft:(p:DiaryPage)=>void; publish:(p:DiaryPage)=>Promise<void>; toggleSaved:(id:string)=>void; toggleHidden:(id:string)=>void; updateProfile:(p:Profile)=>void; addSticker:(assetId:string)=>Promise<void>; removeSticker:(id:string)=>void; addDiary:(title:string)=>string; addPage:(diaryId:string)=>DiaryPage; };
 const Context=createContext<Store|null>(null);
 export function StoreProvider({children}:{children:ReactNode}) {const [data,setData]=useState(initialData),[ready,setReady]=useState(false),[saving,setSaving]=useState(false),[error,setError]=useState(''),[notice,notify]=useState('');const ref=useRef(data),queue=useRef(Promise.resolve()),pending=useRef(0);
- useEffect(()=>{let active=true;readState().then(saved=>{if(!active)return;if(saved?.version===1){ref.current=saved;setData(saved);}setReady(true);}).catch(()=>{if(active){setError('기기 저장소를 열지 못했어요. 브라우저의 저장소 설정을 확인해주세요.');setReady(true);}});return()=>{active=false;};},[]);
+ useEffect(()=>{let active=true;readState().then(saved=>{if(!active)return;if(saved?.version===1){const next=withCurrentSeeds(saved);ref.current=next;setData(next);}setReady(true);}).catch(()=>{if(active){setError('기기 저장소를 열지 못했어요. 브라우저의 저장소 설정을 확인해주세요.');setReady(true);}});return()=>{active=false;};},[]);
  useEffect(()=>{if(notice){const t=setTimeout(()=>notify(''),2600);return()=>clearTimeout(t);}},[notice]);
  const persist=(next:AppData)=>{ref.current=next;setData(next);setSaving(true);pending.current++;const task=queue.current.catch(()=>{}).then(()=>writeState(next));queue.current=task;task.then(()=>setError('')).catch(()=>setError('저장하지 못했어요. 저장 공간을 확보한 뒤 다시 저장해주세요. 현재 화면의 내용은 유지됩니다.')).finally(()=>{pending.current--;if(!pending.current)setSaving(false);});return task;};
  const change=(fn:(d:AppData)=>AppData)=>persist(fn(ref.current));
